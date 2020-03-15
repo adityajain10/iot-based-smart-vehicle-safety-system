@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <style type="text/css">
+        body {
+            padding: 0;
+            margin: 0;
+            overflow-y: hidden;
+            background-color: #34495E;
+            color: white;
+        }
+
+        iframe#ifrm {
+            width: 100%;
+            margin: 0 auto;
+            border: 0px;
+        }
+    </style>
+    <script type="text/javascript">
+
+
+        function dw_getWindowDims() {
+            var doc = document, w = window;
+            var docEl = (doc.compatMode && doc.compatMode === 'CSS1Compat') ? doc.documentElement : doc.body;
+            var width = docEl.clientWidth;
+            var height = docEl.clientHeight;
+            // mobile zoomed in?
+            if (w.innerWidth && width > w.innerWidth) {
+                width = w.innerWidth;
+                height = w.innerHeight;
+            }
+
+            return {width: width, height: height};
+        }
+
+        // arguments: iframe id, height  (e.g., .5 for height="50%")
+        function setIframeHeight(id, h) {
+            var ifrm = document.getElementById(id);
+            if (ifrm) {
+                var winHt = dw_getWindowDims().height;
+                ifrm.style.height = Math.round(h * winHt) + "px";
+                ifrm.style.marginTop = Math.round((winHt - parseInt(ifrm.style.height)) / 2) + "px";
+            }
+        }
+
+        // for sizing and positioning the iframe in the window
+        // pass iframe id and height (e.g., .5 for height="50%")
+        window.onload = function () {
+            setIframeHeight('ifrm', 1);
+        }
+        window.onresize = function () {
+            setIframeHeight('ifrm', 1);
+        }
+
+    </script>
+</head>
+<body>
+<iframe id="ifrm" src="http://iotclouddata.com/project/011/iot16view.php"></iframe>
+</body>
+</html>
